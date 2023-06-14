@@ -1,10 +1,10 @@
-import logging
 import os
-
 import telebot
+import logging
+from config import *
 from flask import Flask, request
 
-from config import *
+
 
 bot = telebot.TeleBot(BOT_TOKEN)
 server = Flask(__name__)
@@ -29,4 +29,5 @@ def redirect_message():
 if __name__ == "__main__":
     bot.remove_webhook()
     bot.set_webhook(url=APP_URL)
-    server.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))\
+    server.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+
