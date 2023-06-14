@@ -2,7 +2,7 @@ import os
 from os.path import join, dirname
 import telebot
 import logging
-from config import *
+# from config import *
 from flask import Flask, request
 from dotenv import load_dotenv
 
@@ -12,8 +12,9 @@ def get_from_env(key):
     load_dotenv(dotenv_path)
     return os.environ.get(key)
 
-token = get_from_env("TELERGAM_BOT_TOKEN")
-bot = telebot.TeleBot(token)
+appurl = get_from_env("APP_URL")
+bottoken = get_from_env("BOT_TOKEN")
+bot = telebot.TeleBot(bottoken)
 
 # bot = telebot.TeleBot(BOT_TOKEN)
 server = Flask(__name__)
@@ -27,7 +28,7 @@ def start(message):
     bot.reply_to(message, f"Hello, {username}!")
 
 
-@server.route(f"/{BOT_TOKEN}", methods=["POST"])
+@server.route(f"/{bottoken}", methods=["POST"])
 def redirect_message():
     json_string = request.get_data().decode("utf-8")
     update = telebot.types.Update.de_json(json_string)
@@ -37,6 +38,6 @@ def redirect_message():
 
 if __name__ == "__main__":
     bot.remove_webhook()
-    bot.set_webhook(url=APP_URL)
+    bot.set_webhook(url=appurl)
     server.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
 
