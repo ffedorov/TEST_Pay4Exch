@@ -1,8 +1,10 @@
-import os
-import telebot
 import logging
-from config import *
+import os
+
+import telebot
 from flask import Flask, request
+
+from config import *
 
 bot = telebot.TeleBot(BOT_TOKEN)
 server = Flask(__name__)
