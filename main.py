@@ -3,7 +3,7 @@ import telebot
 import logging
 from config import *
 from flask import Flask, request
-
+from datetime import datetime
 
 bot = telebot.TeleBot(BOT_TOKEN)
 server = Flask(__name__)
@@ -16,32 +16,18 @@ def start(message):
     username = message.from_user.username
     bot.reply_to(message, f"Hello, {username}!")
 
-#------------------------
+# ------------------------
 
-@bot.message_handler(commands=['docnum'])
+@bot.message_handler(commands=["docnum"])
 def docnum(message):
-    # Таблица транзакций ###################################################################################################
 
-    # connect = sqlite3.connect('Payments.db')
-    # cursor = connect.cursor()
-    # cursor.execute("""CREATE TABLE IF NOT EXISTS telegram_id(
-      #      id INTEGER,
-      #      summ FLOAT,
-      #      name INTEGER
-      #  )""")
-
-    # connect.commit()
-
-    Doc_id = datetime.utcnow()
-    bot.reply_to(message, 'Номер документа: ' + str(Doc_id))
+    DOC_ID = datetime.utcnow()
+    bot.reply_to(message, ("Номер документа: " + str(DOC_ID)))
     # bot.send_message(message.chat.id, ('Номер документа: ' + str(Doc_id))) # Текст Telegram
 
-    #summ = 123.9501
-    #new_str = [Doc_id, summ, message.chat.id]  # список записей пользователя
-    #cursor.execute("INSERT INTO telegram_id VALUES(?,?,?);", new_str)
-    #connect.commit()
 
-#------------------------
+
+# ------------------------
 
 @server.route(f"/{BOT_TOKEN}", methods=["POST"])
 def redirect_message():
