@@ -2,19 +2,9 @@ import os
 from os.path import join, dirname
 import telebot
 import logging
-# from config import *
+from config import *
 from flask import Flask, request
-from dotenv import load_dotenv
 
-
-def get_from_env(key):
-    dotenv_path = join(dirname(__file__), '.env')
-    load_dotenv(dotenv_path)
-    return os.environ.get(key)
-
-# appurl = get_from_env("APP_URL")
-# bottoken = get_from_env("BOT_TOKEN")
-# bot = telebot.TeleBot(bottoken)
 
 bot = telebot.TeleBot(BOT_TOKEN)
 server = Flask(__name__)
