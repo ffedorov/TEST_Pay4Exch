@@ -35,8 +35,8 @@ def start(message):
 @bot.message_handler(commands=["docnum"])
 def docnum(message):
 
-    DOC_ID = datetime.utcnow()
-    bot.reply_to(message, ("Номер документа: " + str(DOC_ID)))
+    doc_id = datetime.utcnow()
+    bot.reply_to(message, ("Номер документа: " + str(doc_id)))
 # ##########################################------------------------
 
 @server.route(f"/{BOT_TOKEN}", methods=["POST"])
