@@ -23,23 +23,21 @@ def start(message):
     username = message.from_user.username
     bot.reply_to(message, f"Hello, {username}!")
 
-    db_oject.execute(f"SELECT id FROM User WHERE id = {id}")
+    db_oject.execute(f"SELECT id FROM users WHERE id = {id}")
     result = db_oject.fetchone()
 
     if not result:
-        db_oject.execute("INSERT INTO User(id, username, usercontact) VALUES (%s, %s, $s)", (id, username, 0))
+        db_oject.execute("INSERT INTO users(id, username, usercontact) VALUES (%s, %s, %s)", (id, username, ''))
         db_connection.commit()
 
 
-# ------------------------
-
+# ##########################################------------------------
 @bot.message_handler(commands=["docnum"])
 def docnum(message):
 
     DOC_ID = datetime.utcnow()
     bot.reply_to(message, ("Номер документа: " + str(DOC_ID)))
-
-# ------------------------
+# ##########################################------------------------
 
 @server.route(f"/{BOT_TOKEN}", methods=["POST"])
 def redirect_message():
