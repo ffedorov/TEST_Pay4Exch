@@ -1,20 +1,35 @@
 import os
 import telebot
 import logging
+import psycopg2
+
 from config import *
 from flask import Flask, request
 from datetime import datetime
+
 
 bot = telebot.TeleBot(BOT_TOKEN)
 server = Flask(__name__)
 logger = telebot.logger
 logger.setLevel(logging.DEBUG)
 
+db_connection = psycopg2.connect(DB_URI, sslmode="require")
+db_oject = db_connection.cursor()
+
 
 @bot.message_handler(commands=["start"])
 def start(message):
+    id = message.from_user.id
     username = message.from_user.username
     bot.reply_to(message, f"Hello, {username}!")
+
+    db_oject.execute(f"SELECT id FROM user WHERE id = {id}")
+    result = db_oject.fetchone()
+
+    if not result:
+        db_oject.execute("INSERT INTO user(id, user_name, user_contact) VALUES (%s, %s, $s)", (id, user_name, 0))
+        db_connection.commit()
+
 
 # ------------------------
 
@@ -23,9 +38,6 @@ def docnum(message):
 
     DOC_ID = datetime.utcnow()
     bot.reply_to(message, ("Номер документа: " + str(DOC_ID)))
-    # bot.send_message(message.chat.id, ('Номер документа: ' + str(Doc_id))) # Текст Telegram
-
-
 
 # ------------------------
 
