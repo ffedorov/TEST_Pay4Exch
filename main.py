@@ -27,7 +27,7 @@ def start(message):
     result = db_oject.fetchone()
 
     if not result:
-        db_oject.execute("INSERT INTO user(id, user_name, user_contact) VALUES (%s, %s, $s)", (id, user_name, 0))
+        db_oject.execute("INSERT INTO user(id, username, user_contact) VALUES (%s, %s, $s)", (id, username, 0))
         db_connection.commit()
 
 
