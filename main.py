@@ -23,11 +23,11 @@ def start(message):
     username = message.from_user.username
     bot.reply_to(message, f"Hello, {username}!")
 
-    db_oject.execute(f"SELECT id FROM user WHERE id = {id}")
+    db_oject.execute(f"SELECT id FROM User WHERE id = {id}")
     result = db_oject.fetchone()
 
     if not result:
-        db_oject.execute("INSERT INTO user(id, username, user_contact) VALUES (%s, %s, $s)", (id, username, 0))
+        db_oject.execute("INSERT INTO User(id, username, usercontact) VALUES (%s, %s, $s)", (id, username, 0))
         db_connection.commit()
 
 
