@@ -26,10 +26,14 @@ def start(message):
     db_oject.execute(f"SELECT id FROM users WHERE id = {id}")
     result = db_oject.fetchone()
 
-#    if not result:
-    db_oject.execute("INSERT INTO users(id, username, usercontact) VALUES (%s, %s, %s)", (id, username, ''))
-    db_connection.commit()
-    bot.reply_to(message, f"+Hello, {username}!")
+    if not result:
+        db_oject.execute("INSERT INTO users(id, username, usercontact) VALUES (%s, %s, %s)", (id, username, ''))
+        db_connection.commit()
+        bot.reply_to(message, f"+0 Hello, {username}!")
+        else
+        bot.reply_to(message, f"+1 Hello, {username}!")
+
+
 
 
 # ##########################################------------------------
