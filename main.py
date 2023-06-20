@@ -21,7 +21,7 @@ db_oject = db_connection.cursor()
 def start(message):
     id = message.from_user.id
     username = message.from_user.username
-    bot.reply_to(message, f"Hello, {username}!")
+    bot.reply_to(message, f"Hello, {username}!\n We are checking your details...")
 
     db_oject.execute(f"SELECT id FROM users WHERE id = {id}")
     result = db_oject.fetchone()
@@ -29,9 +29,9 @@ def start(message):
     if not result:
         db_oject.execute("INSERT INTO users(id, username, usercontact) VALUES (%s, %s, %s)", (id, username, ''))
         db_connection.commit()
-        bot.reply_to(message, f"+1 Hello, {username}!")
+        bot.send_message(id, f"You are identified.\n All is ready.")
     else:
-        bot.reply_to(message, f"+0 Hello, {username}!")
+        bot.send_message(id, f"Identification is not required.\n You have already been identified.")
 
 
 
