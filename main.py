@@ -21,7 +21,7 @@ db_oject = db_connection.cursor()
 def start(message):
     id = message.from_user.id
     username = message.from_user.username
-    ot.reply_to(message, f"Hello, {username}!")
+    bot.reply_to(message, f"Hello, {username}!")
 
 #    db_oject = db_connection.cursor()
     db_oject.execute(f"SELECT id FROM users WHERE id = {id}")
