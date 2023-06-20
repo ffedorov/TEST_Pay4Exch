@@ -23,11 +23,11 @@ def start(message):
     username = message.from_user.username
     bot.reply_to(message, f"Hello, {username}!")
 
-    db_oject = db_connection.cursor()
+#    db_oject = db_connection.cursor()
     db_oject.execute(f"SELECT id FROM users WHERE id = {id}")
     result = db_oject.fetchone()
 
-   # if not result:
+    if not result:
     db_oject.execute("INSERT INTO users(id, username, usercontact) VALUES (%s, %s, %s)", (id, username, ''))
     db_connection.commit()
 
