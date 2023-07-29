@@ -48,8 +48,9 @@ def pay(message):
 
     doc_id = datetime.utcnow()
     id = message.from_user.id
+    global number
     bot.send_message(id, f"Укажите номер заявки:")
-    number = message.text
+    bot.register_next_step_handler(message, number)
 
     bot.send_message(id, number) # f"Укажите сумму платежа:")
 
