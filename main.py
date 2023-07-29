@@ -52,7 +52,7 @@ def pay(message):
     bot.send_message(id, f"Укажите номер заявки:")
     bot.register_next_step_handler(message, number)
 
-    bot.send_message(id, number) # f"Укажите сумму платежа:")
+    bot.send_message(id, str(number)) # f"Укажите сумму платежа:")
 
 #    bot.send_message(id, f"Ссылка для оплаты картой:\nHttps://www.google.com")
 
