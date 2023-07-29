@@ -46,11 +46,34 @@ def docnum(message):
 @bot.message_handler(commands=["pay"])
 def pay(message):
 
-    id = message.from_user.id
     doc_id = datetime.utcnow()
-    bot.reply_to(message, ("Номер документа: " + str(doc_id)))
-    bot.send_message(id, f"Ссылка для оплаты картой:\n Https://www.google.com")
+    id = message.from_user.id
+    bot.send_message(id, f"Ссылка для оплаты картой:\nHttps://www.google.com")
 
+# /api/v1/card/unregistered/debit
+
+# {
+#  "ExtID":"ID88618_176418_test8",
+#  "Amount":600000,
+#  "Description":"Оплата по договору 123_test Иванова И.И.",
+#  "ReturnURL":"http://site.ru_result",
+#  "ClientInfo": {
+#                 "Email":"test@test.com",
+#                 "PhoneNumber": "+7 (911) 123-00-00"
+#                },
+#  "TTL":"00:15:00",
+#  "CartPositions":[{
+#                   "Quantity":1.0,
+#                   "Price":300000,
+#                   "Tax":60,
+#                   "Text":"Оплата по договору 123_test Иванова И.И.",
+#                   "PaymentMethodType":4,
+#                   "PaymentSubjectType":4
+#                   }],
+#  "AdditionalParameters":{
+#                         "DogovorID":"12345_test"
+#                         }
+# }
 
 
 
