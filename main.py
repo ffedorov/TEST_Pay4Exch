@@ -46,9 +46,10 @@ def docnum(message):
 @bot.message_handler(commands=["pay"])
 def pay(message):
 
+    id = message.from_user.id
     doc_id = datetime.utcnow()
     bot.reply_to(message, ("Номер документа: " + str(doc_id)))
-
+    bot.send_message(id, f"Ссылка для оплаты картой:\n Https://www.google.com")
 
 
 
