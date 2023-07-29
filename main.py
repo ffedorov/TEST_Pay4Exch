@@ -33,15 +33,38 @@ def start(message):
     else:
         bot.send_message(id, f"Identification is not required.\nYou have already been identified.")
 
-
-
-
 # ##########################################------------------------
+
 @bot.message_handler(commands=["docnum"])
 def docnum(message):
 
     doc_id = datetime.utcnow()
     bot.reply_to(message, ("Номер документа: " + str(doc_id)))
+
+# ##########################################------------------------
+
+@bot.message_handler(commands=["pay"])
+def pay(message):
+
+    doc_id = datetime.utcnow()
+    bot.reply_to(message, ("Номер документа: " + str(doc_id)))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # ##########################################------------------------
 
 @server.route(f"/{BOT_TOKEN}", methods=["POST"])
