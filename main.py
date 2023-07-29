@@ -48,7 +48,10 @@ def pay(message):
 
     doc_id = datetime.utcnow()
     id = message.from_user.id
-    bot.send_message(id, f"Ссылка для оплаты картой:\nHttps://www.google.com")
+    bot.send_message(id, f"Укажите номер заявки:")
+    bot.send_message(id, f"Укажите сумму платежа:")
+
+#    bot.send_message(id, f"Ссылка для оплаты картой:\nHttps://www.google.com")
 
 # /api/v1/card/unregistered/debit
 
