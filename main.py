@@ -44,11 +44,19 @@ def docnum(message):
 # ##########################################------------------------
 
 @bot.message_handler(commands=["pay"])
-#def pay(message):
-#
+def pay(message):
+
 #    doc_id = datetime.utcnow()
-#    id = message.from_user.id
-#    bot.send_message(id, f"Укажите номер заявки:")
+    id = message.from_user.id
+
+    mesg = bot.send_message(id, f"Укажите номер заявки:")
+    bot.register_next_step_handler(mesg, test)
+
+def test(message):
+    number = message.text
+    bot.send_message(message.chat.id,number)
+    
+
 # Ждём номер заявки и записываем в number
 # Ждём сумму заявки и записываем в summ
 # Кнопки подтверждения и отмемы
@@ -57,16 +65,6 @@ def docnum(message):
 #    bot.register_next_step_handler(message,)
 #    number = message.text
 #    bot.send_message(id, str(number)) # f"Укажите для заявки number сумму платежа:")
-
-def welcome(message):
-    mesg = bot.send_message(message.chat.id,'Please send me message')
-    bot.register_next_step_handler(mesg,test)
-
-
-def test(message):
-    number = message.text
-    bot.send_message(message.chat.id,'You send me message')
-    bot.send_message(message.chat.id,number)
 
 
 
