@@ -47,16 +47,17 @@ def docnum(message):
 def pay(message):
 
 #    doc_id = datetime.utcnow()
-#    id = message.from_user.id
+    id = message.from_user.id
 
-#    mesg = bot.send_message(id, f"Укажите номер заявки:")
-    bot.register_next_step_handler(bot.send_message(message.chat.id, 'Укажите номер заявки:'), test)
 
-def test(message):
+    bot.register_next_step_handler(bot.send_message(id, 'Укажите номер заявки:'), test1)
+
+def test1(message):
     number = message.text
-#    bot.register_next_step_handler(bot.send_message(id, f"Укажите номер заявки:"), test)
-    bot.send_message(message.chat.id,number)
-
+    bot.register_next_step_handler(bot.send_message(id, 'Укажите сумму для оплаты заявки:'+str(number)), test2)
+def test2(message):
+    summ = message.text
+    bot.send_message(message.chat.id,'Сформировать ссылку для онлайн оплаты заявки'+str(number)+'на сумму'+str(summ)+'?')
 
 # Ждём номер заявки и записываем в number
 # Ждём сумму заявки и записываем в summ
