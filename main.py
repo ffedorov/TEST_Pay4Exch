@@ -44,11 +44,11 @@ def docnum(message):
 # ##########################################------------------------
 
 @bot.message_handler(commands=["pay"])
-def pay(message):
-
-    doc_id = datetime.utcnow()
-    id = message.from_user.id
-    bot.send_message(id, f"Укажите номер заявки:")
+#def pay(message):
+#
+#    doc_id = datetime.utcnow()
+#    id = message.from_user.id
+#    bot.send_message(id, f"Укажите номер заявки:")
 # Ждём номер заявки и записываем в number
 # Ждём сумму заявки и записываем в summ
 # Кнопки подтверждения и отмемы
