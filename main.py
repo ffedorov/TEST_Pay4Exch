@@ -52,11 +52,14 @@ def pay(message):
     bot.register_next_step_handler(bot.send_message(id, 'Укажите номер заявки:'), test1)
 
 def test1(message):
+    id = message.from_user.id
     number = message.text
-#    bot.register_next_step_handler(bot.send_message(id, f"Укажите сумму для оплаты заявки: {number}", test2)
 
-#def test2(message):
-#    summ = message.text
+    bot.register_next_step_handler(bot.send_message(id, f"Укажите сумму для оплаты заявки: {number}") , test2)
+
+def test2(message):
+    summ = message.text
+    bot.send_message(message.chat.id, summ)
 #    bot.send_message(message.chat.id,f"Сформировать ссылку для онлайн оплаты заявки {number} на сумму {summ} ?")
 
 # Ждём номер заявки и записываем в number
