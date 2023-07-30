@@ -6,7 +6,10 @@ import psycopg2
 from config import *
 from flask import Flask, request
 from datetime import datetime
+
 from telebot import types
+import requests
+import json
 
 bot = telebot.TeleBot(BOT_TOKEN)
 server = Flask(__name__)
@@ -48,30 +51,19 @@ def pay(message):
 #    doc_id = datetime.utcnow()
 #    id = message.from_user.id
 
-    bot.register_next_step_handler(bot.send_message(message.chat.id, 'Укажите номер заявки:'), test1)
-
-#    bot.send_message(message.chat.id, f"Сформировать ссылку для онлайн оплаты заявки {SUMM} на сумму {SUMM} ?")
-def test1(message):
+    bot.register_next_step_handler(bot.send_message(message.chat.id, 'Укажите номер заявки:'))
     NUMBER = message.text
-    bot.register_next_step_handler(bot.send_message(message.chat.id, f"Укажите сумму для оплаты заявки: {NUMBER}"), test2)
-
-def test2(message):
+    bot.register_next_step_handler(bot.send_message(message.chat.id, f"Укажите сумму для оплаты заявки: {NUMBER}"))
     SUMM = message.text
-#    bot.send_message(message.chat.id, f"Сформировать ссылку для онлайн оплаты заявки {SUMM} на сумму {SUMM} ?")
-
-# Клавиатура
     keyboard = types.InlineKeyboardMarkup()
     keyboard.add(
-        types.InlineKeyboardButton(text='Да', callback_data='Да'),
-        types.InlineKeyboardButton(text='Нет', callback_data='Нет')
+    types.InlineKeyboardButton(text='Да', callback_data='Да'),
+    types.InlineKeyboardButton(text='Нет', callback_data='Нет')
     )
     bot.register_next_step_handler(
         bot.send_message(message.from_user.id, f"Сформировать ссылку для онлайн оплаты заявки {SUMM} на сумму {SUMM} ?",
-                         reply_markup=keyboard),
-        generate
+                         reply_markup=keyboard)
     )
-
-def generate(message):
     if message.text == 'Да':
 #        Генерируем ссылку TKB-Pay
         bot.send_message(message.chat.id, f"Ссылка для оплаты картой:\nHttps://www.google.com")
