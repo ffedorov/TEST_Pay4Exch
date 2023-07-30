@@ -47,13 +47,14 @@ def docnum(message):
 def pay(message):
 
 #    doc_id = datetime.utcnow()
-    id = message.from_user.id
+#    id = message.from_user.id
 
 #    mesg = bot.send_message(id, f"Укажите номер заявки:")
-    bot.register_next_step_handler(bot.send_message(id, f"Укажите номер заявки:"), test)
+    bot.register_next_step_handler(bot.send_message(message.chat.id, 'Укажите номер заявки:'), test)
 
 def test(message):
     number = message.text
+#    bot.register_next_step_handler(bot.send_message(id, f"Укажите номер заявки:"), test)
     bot.send_message(message.chat.id,number)
 
 
