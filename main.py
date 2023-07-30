@@ -16,8 +16,6 @@ logger.setLevel(logging.DEBUG)
 db_connection = psycopg2.connect(DB_URI, sslmode="require")
 db_oject = db_connection.cursor()
 
-NUMBER: str
-
 @bot.message_handler(commands=["start"])
 def start(message):
     id = message.from_user.id
@@ -51,12 +49,14 @@ def pay(message):
 #    id = message.from_user.id
 
     bot.register_next_step_handler(bot.send_message(message.chat.id, 'Укажите номер заявки:'), test1)
+
 def test1(message):
     NUMBER = message.text
     bot.register_next_step_handler(bot.send_message(message.chat.id, f"Укажите сумму для оплаты заявки: {NUMBER}"), test2)
+
 def test2(message):
     SUMM = message.text
-    bot.send_message(message.chat.id, f"Сформировать ссылку для онлайн оплаты заявки {NUMBER} на сумму {SUMM} ?")
+    bot.send_message(message.chat.id, f"Сформировать ссылку для онлайн оплаты заявки {SUMM} на сумму {SUMM} ?")
 
 # Ждём номер заявки и записываем в number
 # Ждём сумму заявки и записываем в summ
