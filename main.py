@@ -58,28 +58,13 @@ def pay(message):
 #    number = message.text
 #    bot.send_message(id, str(number)) # f"Укажите для заявки number сумму платежа:")
 
-@bot.message_handler(content_types=['text'])
-def start(message):
-        if message.text == 'Узнать погоду':
-            bot.send_message(message.chat.id, "Напиши город")
-            bot.register_next_step_handler(message, get_city)
-        elif message.text == "Что ты умеешь?":
-            bot.send_message(message.chat.id,
-                             "Я могу рассказать тебе о погоде на сегодня в твоём городе")
+def welcome(message):
+    mesg = bot.send_message(message.chat.id,'Please send me message')
+    bot.register_next_step_handler(mesg,test)
 
-def get_city(message):
-        city = message.text
-#        r = requests.get(f'https://sinoptik.ua/погода-{city}')
-#        ......
-#        ......здесь
-#        идёт
-#        код
-#        отвечающий
-#        за
-#        парсинг
-#        самой
-#        погоды
-#        ......
+
+def test(message):
+    bot.send_message(message.chat.id,'You send me message')
 
 
 
