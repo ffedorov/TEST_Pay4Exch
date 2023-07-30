@@ -65,8 +65,13 @@ def test2(message):
         types.InlineKeyboardButton(text='Да', callback_data='Да'),
         types.InlineKeyboardButton(text='Нет', callback_data='Нет')
     )
-    bot.send_message(message.from_user.id, f"Сформировать ссылку для онлайн оплаты заявки {SUMM} на сумму {SUMM} ?", reply_markup=keyboard)
-#    bot.register_next_step_handler(answ, generate)
+    bot.register_next_step_handler(
+        bot.send_message(message.from_user.id, f"Сформировать ссылку для онлайн оплаты заявки {SUMM} на сумму {SUMM} ?",
+                         reply_markup=keyboard),
+        generate
+    )
+
+def generate(message):
     if message.text == 'Да':
 #        Генерируем ссылку TKB-Pay
         bot.send_message(message.chat.id, f"Ссылка для оплаты картой:\nHttps://www.google.com")
@@ -74,14 +79,6 @@ def test2(message):
         bot.send_message(message.chat.id, 'Отмена.')
     else:
         bot.send_message(message.chat.id, 'Необходимо выбрать.')
-#def generate(message):
-#    if message.text == 'Да':
-##        Генерируем ссылку TKB-Pay
-#        bot.send_message(message.chat.id, f"Ссылка для оплаты картой:\nHttps://www.google.com")
-#    elif message.text == 'Нет':
-#        bot.send_message(message.chat.id, 'Отмена.')
-#    else:
-#        bot.send_message(message.chat.id, 'Необходимо выбрать.')
 
 #
 
