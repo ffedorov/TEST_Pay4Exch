@@ -64,8 +64,9 @@ def welcome(message):
 
 
 def test(message):
+    number = message.text
     bot.send_message(message.chat.id,'You send me message')
-
+    bot.send_message(message.chat.id,number)
 
 
 
