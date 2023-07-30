@@ -61,13 +61,12 @@ def test2(message):
 
 # Клавиатура
     keyboard = types.InlineKeyboardMarkup()
-    key_yes = types.InlineKeyboardButton(text='Да', callback_data='Да')
-    keyboard.add(key_yes)
-    key_no = types.InlineKeyboardButton(text='Нет', callback_data='Нет')
-    keyboard.add(key_no)
-    answ = bot.send_message(message.from_user.id, f"Сформировать ссылку для онлайн оплаты заявки {SUMM} на сумму {SUMM} ?", reply_markup=keyboard)
-    bot.register_next_step_handler(answ, generate)
-def generate(message):
+    keyboard.add(
+        types.InlineKeyboardButton(text='Да', callback_data='Да'),
+        types.InlineKeyboardButton(text='Нет', callback_data='Нет')
+    )
+    bot.send_message(message.from_user.id, f"Сформировать ссылку для онлайн оплаты заявки {SUMM} на сумму {SUMM} ?", reply_markup=keyboard)
+#    bot.register_next_step_handler(answ, generate)
     if message.text == 'Да':
 #        Генерируем ссылку TKB-Pay
         bot.send_message(message.chat.id, f"Ссылка для оплаты картой:\nHttps://www.google.com")
@@ -75,6 +74,14 @@ def generate(message):
         bot.send_message(message.chat.id, 'Отмена.')
     else:
         bot.send_message(message.chat.id, 'Необходимо выбрать.')
+#def generate(message):
+#    if message.text == 'Да':
+##        Генерируем ссылку TKB-Pay
+#        bot.send_message(message.chat.id, f"Ссылка для оплаты картой:\nHttps://www.google.com")
+#    elif message.text == 'Нет':
+#        bot.send_message(message.chat.id, 'Отмена.')
+#    else:
+#        bot.send_message(message.chat.id, 'Необходимо выбрать.')
 
 #
 
