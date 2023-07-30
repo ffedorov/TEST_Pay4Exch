@@ -43,7 +43,7 @@ def docnum(message):
 
 # ##########################################------------------------
 
-@bot.message_handler(commands=["pay"])
+@bot.message_handler(commands=["pay"]) # Формирование онлайн оплаты
 def pay(message):
 
 #    doc_id = datetime.utcnow()
@@ -55,18 +55,12 @@ def test1(message):
     bot.register_next_step_handler(bot.send_message(message.chat.id, f"Укажите сумму для оплаты заявки: {number}"), test2)
 def test2(message):
     summ = message.text
-#    bot.send_message(message.chat.id, summ)
-    bot.send_message(message.chat.id, f"Сформировать ссылку для онлайн оплаты заявки {summ} на сумму {summ} ?")
+    bot.send_message(message.chat.id, f"Сформировать ссылку для онлайн оплаты заявки {number} на сумму {summ} ?")
 
 # Ждём номер заявки и записываем в number
 # Ждём сумму заявки и записываем в summ
 # Кнопки подтверждения и отмемы
 # При отмене повтор, при подтверждении генерим ссылку
-
-#    bot.register_next_step_handler(message,)
-#    number = message.text
-#    bot.send_message(id, str(number)) # f"Укажите для заявки number сумму платежа:")
-
 
 
 
