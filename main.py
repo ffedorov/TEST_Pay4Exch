@@ -51,10 +51,8 @@ def pay(message):
 #    doc_id = datetime.utcnow()
 #    id = message.from_user.id
 
-    bot.register_next_step_handler(bot.send_message(message.chat.id, 'Укажите номер заявки:'))
-    NUMBER = message.text
-    bot.register_next_step_handler(bot.send_message(message.chat.id, f"Укажите сумму для оплаты заявки: {NUMBER}"))
-    SUMM = message.text
+    bot.register_next_step_handler(bot.send_message(message.chat.id, 'Укажите номер заявки:'), NUMBER = message.text)
+    bot.register_next_step_handler(bot.send_message(message.chat.id, f"Укажите сумму для оплаты заявки: {NUMBER}"),  SUMM = message.text)
     keyboard = types.InlineKeyboardMarkup()
     keyboard.add(
     types.InlineKeyboardButton(text='Да', callback_data='Да'),
